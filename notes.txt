@@ -1,0 +1,39 @@
+1. Root module <modules> pack POM and child modules with <parent> ROOT
+2. with DEP for BOOT-HIB-PSQL-SEC-JWT
+spring-boot-starter-data-jpa
+spring-boot-starter-web
+spring-boot-starter-validation
+spring-boot-starter-security
+postgresql
+dao-serv-app spring-boot-starter
+app + jjwt
+3. SCHEMA + DATA FOR POSTGRESQL
+4. DAO:
+ext JpaRepo
+model -> ..
+5. SERVICE:
+Services -> impl
+UserPrinc + UsServDetails
+Exceptions
+DTO etc
+6. APP:
+config -> sec config +pass enc, GrAutDef ""
+-httpbasic -csrf -sessMan.sessCrPol.Stateless +MB auth antMat +reg/auth permit + filterBef(jwtF, UsPAssAuthFil.class
+security -> JwtProv(gen,valid,getEm), Filter(getTokFromReq->doFilter)
+model -> mb Auth/Reg Req etc + @Valid @NotEmpty
+0. PROPS
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.url=jdbc:postgresql://localhost/demoapp
+spring.datasource.username=postgres
+spring.datasource.password=root
+
+spring.sql.init.mode=always
+spring.sql.init.schema-locations=classpath*:postgres/schema.sql
+spring.sql.init.data-locations=classpath*:postgres/data.sql
+
+spring.jpa.hibernate.ddl-auto=none
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.current_session_context_class=org.springframework.orm.hibernate5.SpringSessionContext
+
+jwt.secret=supersecret
+role.default=user
